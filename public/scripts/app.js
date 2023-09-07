@@ -21,7 +21,6 @@ class App {
 			node.innerHTML = car.render()
 			this.carListContainer.appendChild(node)
 		})
-		console.log("rendered")
 	}
 
 	async load() {
@@ -36,17 +35,14 @@ class App {
 			let filterTipeDriver = true
 			const dateAvailable = new Date(data.availableAt)
 			const dateSewa = new Date(`${this.tanggal.value} ${this.waktuJemput.value}`)
-			const penumpang = data.capacity >= this.jumlahPenumpang.value
-			const waktu = dateAvailable >= dateSewa
 			const isAvailable = this.tipeDriver.value === "true" && data.available
 			const isNotAvailable = this.tipeDriver.value === "false" && !data.available
 
-
 			if(this.jumlahPenumpang.value !== ""){
-				filterPenumpang = penumpang
+				filterPenumpang = data.capacity >= this.jumlahPenumpang.value
 			}
 			if(this.tanggal.value !== ""){
-				filterWaktu = waktu
+				filterWaktu = dateAvailable >= dateSewa
 			}
 			if(this.tipeDriver.value !== ""){
 				filterTipeDriver = isAvailable || isNotAvailable
