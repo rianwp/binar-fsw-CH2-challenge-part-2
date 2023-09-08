@@ -13,8 +13,7 @@ class App {
 		this.run()
 	}
 
-
-	async run() {
+	async runWithLoading() {
 		const loadingInnerHTML = (`
 			<div class="text-center">
 				<div class="spinner-border" role="status">
@@ -32,7 +31,14 @@ class App {
 				this.carListContainer.appendChild(node)
 			})
 		}, 500)
-		
+	}
+	
+	async run() {
+		Car.list.forEach((car) => {
+			const node = document.createElement("slot")
+			node.innerHTML = car.render()
+			this.carListContainer.appendChild(node)
+		})
 	}
 
 	async load() {

@@ -15,7 +15,7 @@ const app = new App()
 
 app.cariMobilButton.addEventListener('click', () => {
     app.clear()
-    app.run()
+    app.runWithLoading()
 })
 
 app.init()
