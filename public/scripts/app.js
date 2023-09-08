@@ -32,8 +32,8 @@ class App {
 			})
 		}, 500)
 	}
-	
-	async run() {
+
+	run() {
 		Car.list.forEach((car) => {
 			const node = document.createElement("slot")
 			node.innerHTML = car.render()
