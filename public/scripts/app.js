@@ -15,12 +15,24 @@ class App {
 
 
 	async run() {
+		const loadingInnerHTML = (`
+			<div class="text-center">
+				<div class="spinner-border" role="status">
+					<span class="visually-hidden">Loading...</span>
+				</div>
+			</div>
+		`)
+		this.carListContainer.innerHTML = loadingInnerHTML
 		await this.loadFilter()
-		Car.list.forEach((car) => {
-			const node = document.createElement("slot")
-			node.innerHTML = car.render()
-			this.carListContainer.appendChild(node)
-		})
+		setTimeout(() => {
+			this.carListContainer.innerHTML = ""
+			Car.list.forEach((car) => {
+				const node = document.createElement("slot")
+				node.innerHTML = car.render()
+				this.carListContainer.appendChild(node)
+			})
+		}, 500)
+		
 	}
 
 	async load() {
@@ -49,7 +61,7 @@ class App {
 			}
 			return filterPenumpang && filterWaktu && filterTipeDriver
 		})
-		
+
 		Car.init(cars)
 	}
 
